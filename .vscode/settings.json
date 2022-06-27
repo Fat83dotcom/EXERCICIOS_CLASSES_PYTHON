@@ -1,0 +1,10 @@
+{
+    "python.pythonPath": "/home/fernando/.local/share/virtualenvs/EXERCICIOS_CLASSES_PYTHON-_0_JwNya/bin/activate", 
+    "code-runner.executorMap": {
+    
+        "python": "/home/fernando/.local/share/virtualenvs/EXERCICIOS_CLASSES_PYTHON-_0_JwNya/bin/activate",
+        
+    },
+    "python.autoComplete.addBrackets": true,
+    "python.analysis.completeFunctionParens": true
+}
