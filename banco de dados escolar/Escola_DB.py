@@ -1,5 +1,5 @@
 import psycopg2
-from confideltials import senha
+from confidentials import senha
 
 
 class Escola:
