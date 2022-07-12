@@ -4,8 +4,15 @@
 def func(*args):
     var1 = args  # var1 recebe uma tupla de *args
 
-    for v in var1:  # a estrutura deve fazer o desempacotamento das variaveis
-        print(v)
+    var2 = []
+    for i, v in enumerate(var1):  # a estrutura deve fazer o desempacotamento das variaveis
+        var2.append(f'{v}')
+
+    var3 = (tuple(var2))
+
+    code = f'insert into table values {var3}'
+
+    print(code)
 
 
 func(3, 4, 5, 'fernando')
