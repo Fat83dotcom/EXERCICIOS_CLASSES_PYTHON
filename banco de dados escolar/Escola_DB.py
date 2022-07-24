@@ -7,6 +7,18 @@ class BancoDeDados:
         self.con = psycopg2.connect(host=host, port=port, dbname=dbname, user=user, password=password)
         self.cursor = self.con.cursor()
 
+    def fecharConexao(self):
+        self.con.close()
+
+    def executar(self, sql):
+        self.cursor.execute(sql)
+
+    def enviar(self):
+        self.con.commit()
+
+    def buscarDados(self):
+        return self.cursor.fetchall()
+
     def geradorSQLInsert(self, *args, nome_tabela=''):
         dados = args
         dadosDesempacotados = []
@@ -18,9 +30,9 @@ class BancoDeDados:
 
     def verificadorEnderecoExiste(self, logradouro, numero):
         sql = "SELECT logradouro, numero, cod_end  FROM endereco"
-        self.cursor.execute(sql)
-        self.con.commit()
-        pesquisa = self.cursor.fetchall()
+        self.executar(sql)
+        self.enviar()
+        pesquisa = self.buscarDados()
         for valores in pesquisa:
             if logradouro == valores[0] and numero == valores[1]:
                 return valores[-1]
@@ -28,10 +40,13 @@ class BancoDeDados:
 
 
 class Escola(BancoDeDados):
+    def __init__(self, host='', port='', dbname='', user='', password='') -> None:
+        super().__init__(host, port, dbname, user, password)
+
     def cadastroAluno(self, cpf, nome_aluno, sobrenome_aluno, endereco):
         sql = self.geradorSQLInsert(cpf, nome_aluno, sobrenome_aluno, endereco, nome_tabela='aluno')
-        self.cursor.execute(sql)
-        self.con.commit()
+        self.executar(sql)
+        self.enviar()
 
     def cadastroEndereco(self, logradouro, numero, bairro, complemento):
         verificaExistencia = self.verificadorEnderecoExiste(logradouro, numero)
@@ -39,15 +54,16 @@ class Escola(BancoDeDados):
             return verificaExistencia
         else:
             sql = self.geradorSQLInsert(logradouro, numero, bairro, complemento, nome_tabela='endereco')
-            self.cursor.execute(sql)
-            self.con.commit()
+            self.executar(sql)
+            self.enviar()
             codigoExistente = self.verificadorEnderecoExiste(logradouro, numero)
             return codigoExistente
 
 
 if __name__ == '__main__':
     e = Escola('192.168.0.4', '5432', 'db_escola', 'fernando', senha)
-    endereco = e.cadastroEndereco('João Naves de Avila', '4512', 'João Padilha Almeida da Silva Saravá', '')
-    e.cadastroAluno('98585732281', 'Fernando', 'Jovem', endereco)
+    endereco = e.cadastroEndereco('Almondegas Podres de Melo', '12', 'João Padilha Saravá', '')
+    e.cadastroAluno('98514032281', 'Maria', 'Joana', endereco)
+    e.fecharConexao()
     # a = e.geradorSQLInsert('okokos', 'dmkmkdmkfdkm', 'ososos', nome_tabela='aluno')
     # print(a)

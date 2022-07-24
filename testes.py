@@ -2,7 +2,12 @@ class Aluno:
     def __init__(self, nome) -> None:
         self.__nome = nome
 
+    def mostraNome(self):
+        print(self.__nome)
+
 
 aluno = Aluno('Fernando')
 
-print(aluno.__nome)
+aluno.mostraNome()
+
+# print(aluno.__nome)
