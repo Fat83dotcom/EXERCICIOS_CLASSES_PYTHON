@@ -11,55 +11,81 @@ uma classe para representar um racional e os seguinte metodos:
 
 
 class Racional:
-    def __init__(self, numerador, denominador) -> None:
-        self.numerador = numerador
+    def __init__(self) -> None:
+        self.__numerador = None
+        self.__denominador = None
+
+    def entrarNumeros(self, numerador, denominador):
         self.denominador = denominador
+        self.__numerador = numerador
 
     @property
     def denominador(self):
-        return self._denominador
+        return self.__denominador
 
     @denominador.setter
     def denominador(self, valor):
         if valor == 0:
-            self._denominador = 'Denominador Não pode ser zero.'
+            self.__denominador = None
         else:
-            self._denominador = valor
+            self.__denominador = valor
+
+    @property
+    def numerador(self):
+        return self.__numerador
 
     def inverterSinal(self):
-        self.numerador = -self.numerador
+        self.__numerador = -self.__numerador
 
     def somaRacional(self, num, den):
-        r = Racional(num, den)
-        denominador_mmc = self.denominador * r.denominador
-        numerador_soma = (r.denominador * self.numerador) + (self.denominador * r.numerador)
-        print(f'A soma entre {self.numerador}/{self.denominador} e {r.numerador}/{r.denominador} é {numerador_soma}/{denominador_mmc}')
+        self.entrarNumeros(num, den)
+        try:
+            denominador_mmc = self.__denominador * self.__denominador
+            numerador_soma = (self.__denominador * self.__numerador) + (self.__denominador * self.__numerador)
+            print(f'A soma entre {self.__numerador}/{self.__denominador} e'
+                  f' {self.__numerador}/{self.__denominador} é {numerador_soma}/{denominador_mmc}')
+        except TypeError as erro:
+            print(f'Não há divisão por zero ou letras, erro levantado: {erro} ')
 
     def subtracaoRacional(self, num, den):
-        r = Racional(num, den)
-        denominador_mmc = self.denominador * r.denominador
-        numerador_sub = (r.denominador * self.numerador) - (self.denominador * r.numerador)
-        print(f'A subtração entre {self.numerador}/{self.denominador} e {r.numerador}/{r.denominador} é {numerador_sub}/{denominador_mmc}')
+        self.entrarNumeros(num, den)
+        try:
+            denominador_mmc = self.__denominador * self.__denominador
+            numerador_sub = (self.__denominador * self.__numerador) - (self.__denominador * self.__numerador)
+            print(f'A subtração entre {self.__numerador}/{self.__denominador} e'
+                  f' {self.__numerador}/{self.__denominador} é {numerador_sub}/{denominador_mmc}')
+        except TypeError as erro:
+            print(f'Não há divisão por zero ou letras, erro levantado: {erro} ')
 
     def produtoRacional(self, num, den):
-        r = Racional(num, den)
-        numerador = self.numerador * r.numerador
-        denominador = self.denominador * r.denominador
-        print(f'O produto entre {self.numerador}/{self.denominador} e {r.numerador}/{r.denominador} é {numerador}/{denominador}')
+        self.entrarNumeros(num, den)
+        try:
+            numerador = self.__numerador * self.__numerador
+            denominador = self.__denominador * self.__denominador
+            print(f'O produto entre {self.__numerador}/{self.__denominador} e'
+                  f' {self.__numerador}/{self.__denominador} é {numerador}/{denominador}')
+        except TypeError as erro:
+            print(f'Não há divisão por zero ou letras, erro levantado: {erro} ')
 
     def quocienteRacional(self, num, den):
-        r = Racional(num, den)
-        numerador = self.numerador * r.denominador
-        denominador = self.denominador * r.numerador
-        print(f'O quociente entre {self.numerador}/{self.denominador} e {r.numerador}/{r.denominador} é {numerador}/{denominador}')
+        self.entrarNumeros(num, den)
+        try:
+            numerador = self.__numerador * self.__denominador
+            denominador = self.__denominador * self.__numerador
+            print(f'O quociente entre {self.__numerador}/{self.__denominador} e'
+                  f' {self.__numerador}/{self.__denominador} é {numerador}/{denominador}')
+        except TypeError as erro:
+            print(f'Não há divisão por zero ou letras, erro levantado: {erro} ')
 
 
 if __name__ == '__main__':
-    r = Racional(4, 2)
+    r = Racional()
+    p = Racional()
+    r.entrarNumeros(3, 4)
     print(r.denominador)
     # print(r.inverterSinal())
     print(r.numerador)
-    r.somaRacional(6, -3)
-    r.subtracaoRacional(9, -5)
-    r.produtoRacional(3, 9)
-    r.quocienteRacional(5, 8)
+    p.somaRacional(3, 4)
+    p.subtracaoRacional(9, 5)
+    p.produtoRacional(3, 9)
+    p.quocienteRacional(5, 8)
