@@ -1,13 +1,6 @@
 from datetime import datetime
 
 
-class Cliente:
-    def __init__(self) -> None:
-        self.nome = None
-        self.cpf = None
-        self.endereco = Endereco()
-
-
 class Endereco:
     def __init__(self) -> None:
         self.rua = None
@@ -17,20 +10,31 @@ class Endereco:
         self.estado = None
 
 
+class Cliente:
+    def __init__(self, nome, cpf) -> None:
+        self.nome = nome
+        self.cpf = cpf
+        self.endereco = Endereco()
+
+    def inserirEndereco(self, rua, numero, bairro, cidade, estado):
+        self.endereco.rua = rua
+        self.endereco.numero = numero
+        self.endereco.bairro = bairro
+        self.endereco.cidade = cidade
+        self.endereco.estado = estado
+
+
 class Conta:
     # definição da classe
 
-    def __init__(self, numero, saldo, limite) -> None:
-        self.titular = Cliente()
+    def __init__(self, cliente, numero, saldo, limite) -> None:
+        self.titular = cliente
         self.numero = numero
         self.saldo = saldo
         self.limite = limite
         self.extrato = Extrato(self.numero)
 
     # metodos da classe
-    def idCliente(self, nome, cpf):
-        self.titular.nome = nome
-        self.titular.cpf = cpf
 
     def depositar(self, valor):
         self.saldo += valor
@@ -69,10 +73,11 @@ class Extrato:
 
 
 if __name__ == '__main__':
-    c1 = Conta(1, 0, 1000)
-    c2 = Conta(2, 0, 2000)
-    c1.idCliente('Fernando Mendes', '929292992')
-    c2.idCliente('Maria', '93939393')
+    cl1 = Cliente('Fernando', '784444555')
+    cl1.inserirEndereco('rua das cachoeiras', 234, 'jardim das babilonias', 'São Pala', 'MK')
+    print(cl1.endereco.rua)
+    c1 = Conta(cl1, 1, 0, 1000)
+    c2 = Conta(cl1, 2, 0, 2000)
     c1.depositar(3000)
     c1.transferir(c2, 1000)
     c1.sacar(432)
