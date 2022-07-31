@@ -1,0 +1,18 @@
+-- SELECT * FROM curso; -- WHERE cod_dep > 10;
+-- ALTER TABLE disciplina ADD unique(nome_disciplina); -- Altera a propriedade do atributo pata UNIQUE
+-- UPDATE departamento SET nome_dep = 'Engenharia Química' WHERE nome_dep = 'Química Geral'; 
+-- ALTER TABLE departamento ALTER COLUMN nome_dep TYPE varchar(100); -- Altera o valr de varchar da coluna nome_dep
+-- DELETE FROM departamento;
+-- SELECT count(*) FROM curso;
+-- ALTER TABLE disciplina ALTER COLUMN nome_disciplina TYPE varchar(90);
+-- ALTER TABLE curso ADD unique(nome_c);
+-- CREATE TABLE grade (
+-- 	cod_curso int NOT NULL,
+-- 	cod_disciplina int NOT NULL,
+-- 	PRIMARY KEY (cod_curso, cod_disciplina),
+-- 	FOREIGN KEY (cod_curso) REFERENCES curso (cod_c),
+-- 	FOREIGN KEY (cod_disciplina) REFERENCES disciplina (cod_d)
+-- );
+-- DROP TABLE grade;
+-- SELECT * FROM prerequisito;
+alter

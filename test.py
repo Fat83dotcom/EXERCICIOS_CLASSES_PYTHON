@@ -1,7 +1,7 @@
-a, b = 0, 1
+def func(**kwargs):
+    dados = (kwargs)
+    for i, u in dados.items():
+        print(i)
 
-while b < 10:
 
-    print(b)
-
-    a, b = b, a+b
+print(func(rua='casa', fepartamento='eee', numero=8888))
