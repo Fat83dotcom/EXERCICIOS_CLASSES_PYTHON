@@ -1,9 +1,9 @@
 import psycopg2
 from confidentials import senha
-import abc
+from abc import ABC
 
 
-class BancoDeDados(abc.ABC):
+class BancoDeDados(ABC):
     def __init__(self, host='', port='', dbname='', user='', password='') -> None:
         self.con = psycopg2.connect(host=host, port=port, dbname=dbname, user=user, password=password)
         self.cursor = self.con.cursor()
